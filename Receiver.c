@@ -39,7 +39,7 @@ void printRxDataAndAvgToConsole(int *RxData, float SMA)
   printf("SimpleMovingAverage of last 5 values: %f\n",SMA);  
 }
 
-bool receiveAndProcessSensorData(int* batteryCharge, int* batteryTemperature)
+bool receiveAndProcessSensorData(int* batteryCharge, int* batteryTemperature, float chargeLimit, float tempLimit)
 {
   float movingAvgBatChr, movingAvgBatTemp;
   readDataFromConsole(batteryCharge,batteryTemperature);
