@@ -4,7 +4,7 @@ void readDataFromConsole(int* batteryCharge, int* batteryTemperature)
 {
   for(int index = 0; index < 50; index++)
   {
-    scanf("%d, %d",&batteryCharge[index], &batteryTemperature[index]);
+    scanf("%d, %d\n",&batteryCharge[index], &batteryTemperature[index]);
   }
 }
 
