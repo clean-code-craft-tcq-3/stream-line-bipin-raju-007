@@ -6,8 +6,8 @@ def test_battery():
     dummy_battery = Battery()
     assert (dummy_battery.get_charge() == 99)
     assert (dummy_battery.get_charge() == 98)
-    assert (20 <= dummy_battery.get_temperature() < 45)
-    assert (20 <= dummy_battery.get_temperature() < 45)
+    assert (20 <= dummy_battery.get_temperature() < 50)
+    assert (20 <= dummy_battery.get_temperature() < 50)
 
 
 def test_charge_sensor():
