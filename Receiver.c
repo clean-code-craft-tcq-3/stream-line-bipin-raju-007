@@ -17,11 +17,26 @@ bool checkAvgWithinRange(float *movingAvg, float limit)
   return false;
 }
 
+void maxAndMinValue(int *sensorparameter, int *max, int *min)
+{
+  for(int index = 0; index < 50; index++)
+  {
+    if(sensorparameter[index] > *max)
+    {
+      *max = sensorparameter[index];
+    }
+    if(sensorparameter[index] < *min)
+    {
+      *min = sensorparameter[index];
+    }
+  }
+}
+
 float calculateSimpleMovingAverage(int *sensorparameter)
 {
   float SMAvalue = 0.0;
   float total = 0.0;
-  for(int index = (readings_count-5); index < readings_count; index++)
+  for(int index = (readings_count-5); index < 50; index++)
   {
     total += sensorparameter[index];
   }
@@ -29,13 +44,15 @@ float calculateSimpleMovingAverage(int *sensorparameter)
   return SMAvalue;
 }
 
-void printRxDataAndAvgToConsole(int *RxData, float SMA)
+void printRxDataAndAvgToConsole(int *RxData, float SMA, int maxVal, int minVal)
 {
   printf("Data received from sender\n");
   for(int index = 0; index < 50; index++)
   {
     printf("%d\n",RxData[index]);
   }
+  printf("Max Value : %d\n",maxVal);  
+  printf("Min Value: %d\n",minVal);  
   printf("SimpleMovingAverage of last 5 values: %f\n",SMA);  
 }
 
@@ -43,10 +60,14 @@ bool receiveAndProcessSensorData(int* batteryCharge, int* batteryTemperature, fl
 {
   float movingAvgBatChr, movingAvgBatTemp;
   readDataFromConsole(batteryCharge,batteryTemperature);
+  int maxBatChrgVal = movingAvgBatChr[0], minBatChrgVal = movingAvgBatChr[0];
+  int maxBatTempVal = movingAvgBatTemp[0], minBatTempVal = movingAvgBatTemp[0];
+  maxAndMinValue(movingAvgBatChr, &maxBatChrgVal, &minBatChrgVal);
+  maxAndMinValue(movingAvgBatTemp, &maxBatTempVal, &maxBatTempVal);
   movingAvgBatChr = calculateSimpleMovingAverage(batteryCharge);
   movingAvgBatTemp = calculateSimpleMovingAverage(batteryTemperature);
-  printRxDataAndAvgToConsole(batteryCharge, movingAvgBatChr);
-  printRxDataAndAvgToConsole(batteryTemperature, movingAvgBatTemp);
+  printRxDataAndAvgToConsole(batteryCharge, movingAvgBatChr, maxBatChrgVal, minBatChrgVal);
+  printRxDataAndAvgToConsole(batteryTemperature, movingAvgBatTemp, maxBatTempVal, minBatTempVal);
   isChargeInRange = checkAvgWithinRange(movingAvgBatChr, chargeLimit);
   isTempInRange = checkAvgWithinRange(movingAvgBatTemp, tempLimit);
   if(isChargeInRange && isTempInRange)
@@ -55,3 +76,7 @@ bool receiveAndProcessSensorData(int* batteryCharge, int* batteryTemperature, fl
   }
   return false;
 }
+
+
+
+  
