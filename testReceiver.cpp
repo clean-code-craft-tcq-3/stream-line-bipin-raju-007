@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "test/catch.hpp"
-#include "Data_Receiver.h"
+#include "Receiver.h"
 
 TEST_CASE("Test to check whether sensor data parameters are in Range") 
 {
