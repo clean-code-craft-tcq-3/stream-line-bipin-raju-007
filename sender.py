@@ -49,4 +49,3 @@ if __name__ == '__main__':
     my_charge_sensor = ChargeSensor(my_battery)
     my_heat_sensor = HeatSensor(my_battery)
     send_battery_params(my_charge_sensor, my_heat_sensor, print_on_console)
-    print_on_console(my_battery)
