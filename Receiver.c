@@ -46,7 +46,7 @@ float calculateSimpleMovingAverage(int *sensorparameter)
 
 void printRxDataAndAvgToConsole(int *RxData, float SMA, int maxVal, int minVal, sensorParam Value)
 {
-    if(BATCHARGE == sensorParam)
+    if(BATCHARGE == Value)
     {
         printf("Battery charge received from sender\n");
     }
