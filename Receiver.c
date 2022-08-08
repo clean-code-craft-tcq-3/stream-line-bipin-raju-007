@@ -44,7 +44,7 @@ float calculateSimpleMovingAverage(int *sensorparameter)
   return SMAvalue;
 }
 
-void printRxDataAndAvgToConsole(int *RxData, float SMA, int maxVal, int minVal, enum sensorParam)
+void printRxDataAndAvgToConsole(int *RxData, float SMA, int maxVal, int minVal, sensorParam Value)
 {
     if(BATCHARGE == sensorParam)
     {
