@@ -28,6 +28,7 @@ jobs:
       - name: Run and collect coverage
         run: |
           coverage run --branch test_sender.py
+          coverage run --branch testReceiver.cpp
           coverage html
           coverage report
       - name: Upload coverage
@@ -36,10 +37,15 @@ jobs:
           name: coverage
           path: ./htmlcov
           retention-days: 21
-      - name: build
-        run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker *.c*
 
-      - name: Integrate Sender and Reciever
-        run: |
-          python test_sender.py
-          ./testchecker
+      - name: build sender 
+        run: python sender.py
+      
+      - name: build receiver 
+        run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o testreceiver testReceiver.cpp ./Receiver.c 
+
+      - name: run sender
+        run:  python sender.py
+      
+      - name: Pipeline sender/receiver
+        run:  python sender.py |  ./Receiver.c
