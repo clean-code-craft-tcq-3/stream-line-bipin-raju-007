@@ -47,4 +47,4 @@ jobs:
         run:  python sender.py
       
       - name: Pipeline sender/receiver
-        run:  python sender.py | ./Receiver.c
+        run:  python sender.py | ./Receiver
